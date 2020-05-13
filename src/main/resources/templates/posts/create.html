@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials :: head"></head>
+<body>
+<nav th:replace="partials/partials :: navbar"></nav>
+<div class="container">
+<form action="/posts/create" method="post">
+
+    <label for="title">Title:</label><br>
+    <input type="text" width="80vw" id="title" name="title" placeholder="Title your blog post" /><br>
+    <label for="body">Blog Body</label><br>
+    <textarea name="body" id="body" cols="30" rows="10" placeholder="What's on your mind?"></textarea><br>
+<!--    <input type="text" width="80vw" name="body" placeholder="What's on your mind?">-->
+    <button class="btn btn-primary" type="submit" value="Post That Post">Post That Post</button>
+
+</form>
+</div>
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+</body>
+</html>

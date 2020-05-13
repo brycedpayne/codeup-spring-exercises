@@ -10,7 +10,8 @@
     <h2>Check out some of these posts!</h2>
     <div th:each="post : ${posts}">
         <h3><a th:text="${post.title}" href=""></a></h3>
-        <p th:text="${post.body}"></p>
+<!--        <p><span th:="${post.body}"></span></p>-->
+        <div th:remove="tag" th:utext="${post.body}"></div>
     </div>
 </div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
