@@ -45,8 +45,8 @@ public class PostController {
         Post post = new Post();
         post.setTitle(titleParam);
         post.setBody(bodyParam);
-        this.postRepository.save(post);
-        model.addAttribute("posts", postRepository.findAll());
-        return "/posts/index";
+        post = this.postRepository.save(post);
+        model.addAttribute("post", post);
+        return "/posts/show";
     }
 }
