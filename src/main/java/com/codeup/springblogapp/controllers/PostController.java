@@ -22,7 +22,7 @@ public class PostController {
     }
 
 
-    @GetMapping("/posts/index")
+    @GetMapping("/posts")
     public String posts(Model model) {
         model.addAttribute("posts", postRepository.findAll());
         return "posts/index";
@@ -48,5 +48,28 @@ public class PostController {
         post = this.postRepository.save(post);
         model.addAttribute("post", post);
         return "/posts/show";
+    }
+
+    @GetMapping("/posts/update/{id}")
+    public String submitPostUpdate(@PathVariable(name = "id") long id, Model model) {
+        Post post = postRepository.getOne(id);
+        model.addAttribute("post", post);
+        return "/posts/update";
+    }
+    @PostMapping("/posts/update/{id}")
+    public String submitUpdatedPost(@PathVariable(name = "id")long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body, Model model) {
+        Post post = postRepository.getOne(id);
+        post.setTitle(title);
+        post.setBody(body);
+        postRepository.save(post);
+        model.addAttribute("post", post);
+        return "redirect:/posts/"+id;
+    }
+
+    @PostMapping("posts/delete/{id}")
+    public String deletePost(@PathVariable long id){
+        Post post = postRepository.getOne(id);
+        postRepository.delete(post);
+        return "redirect:/posts";
     }
 }

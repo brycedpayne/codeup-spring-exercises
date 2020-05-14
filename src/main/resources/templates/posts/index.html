@@ -6,13 +6,21 @@
 <body>
 
 <nav th:replace="partials/partials :: navbar"></nav>
+
+<br>
 <div class="container">
     <h2>Check out some of these posts!</h2>
+    <hr>
     <div th:each="post : ${posts}">
-        <h3><a th:text="${post.title}" th:href="@{'/posts/'+ ${post.id}}"></a></h3>
-<!--        <p><span th:="${post.body}"></span></p>-->
-        <div th:remove="tag" th:utext="${post.body}"></div>
+        <form>
+            <h3><a th:text="${post.title}" th:href="@{'/posts/'+ ${post.id}}"></a></h3>
+            <!--        <p><span th:="${post.body}"></span></p>-->
+            <div class="d-inline-block text-truncate" style="max-height: 60px" th:remove="tag" th:utext="${post.body}"></div>
+
+        </form>
+        <br>
     </div>
+
 </div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
