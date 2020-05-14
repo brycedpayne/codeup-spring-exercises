@@ -1,7 +1,11 @@
 package com.codeup.springblogapp.controllers;
 
+import com.codeup.springblogapp.models.Image;
 import com.codeup.springblogapp.models.Post;
+import com.codeup.springblogapp.models.User;
+import com.codeup.springblogapp.repositories.ImageRepository;
 import com.codeup.springblogapp.repositories.PostRepository;
+import com.codeup.springblogapp.repositories.UserRepository;
 import org.apache.coyote.http11.upgrade.UpgradeServletOutputStream;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +20,13 @@ public class PostController {
 
     // Dependency Injection
     private PostRepository postRepository;
+    private UserRepository userRepository;
+    private ImageRepository imageRepository;
 
-    public PostController(PostRepository postRepository){
+    public PostController(PostRepository postRepository, UserRepository userRepository, ImageRepository imageRepository){
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
+        this.imageRepository = imageRepository;
     }
 
 
@@ -42,9 +50,11 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String submitCreatePost(@RequestParam(name = "title") String titleParam, @RequestParam(name = "body") String bodyParam, Model model) {
+        User user = userRepository.getOne((long) 1); //will be removed later
         Post post = new Post();
         post.setTitle(titleParam);
         post.setBody(bodyParam);
+        post.setUser(user);
         post = this.postRepository.save(post);
         model.addAttribute("post", post);
         return "/posts/show";

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="partials/partials :: head"></head>
-
+<head>
+    <title>Blog Posts</title>
+<div th:replace="partials/partials :: head"></div>
+</head>
 <body>
 
 <nav th:replace="partials/partials :: navbar"></nav>
@@ -15,7 +16,7 @@
         <form>
             <h3><a th:text="${post.title}" th:href="@{'/posts/'+ ${post.id}}"></a></h3>
             <!--        <p><span th:="${post.body}"></span></p>-->
-            <div class="d-inline-block text-truncate" style="max-height: 60px" th:remove="tag" th:utext="${post.body}"></div>
+            <div class="d-inline-block text-wrap text-truncate" style="max-width: 100%; max-height: 6em; text-overflow: ellipsis"  th:utext="${post.body}"></div>
 
         </form>
         <br>

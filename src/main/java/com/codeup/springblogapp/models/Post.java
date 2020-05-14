@@ -1,5 +1,6 @@
 package com.codeup.springblogapp.models;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name ="posts")
@@ -14,6 +15,13 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Image> images;
+
     public Post() {
     }
 
@@ -27,6 +35,14 @@ public class Post {
         this.title = title;
         this.body = body;
     }
+
+    public List<Image> getImages() { return images; }
+
+    public void setImages(List<Image> images) { this.images = images; }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
 
     public long getId() { return id; }
 
