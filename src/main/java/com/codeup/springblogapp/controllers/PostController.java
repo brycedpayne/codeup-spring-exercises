@@ -55,6 +55,7 @@ public class PostController {
         post.setTitle(titleParam);
         post.setBody(bodyParam);
         post.setUser(user);
+//        post.setImages(imageRepository.findAll());
         post = this.postRepository.save(post);
         model.addAttribute("post", post);
         return "/posts/show";

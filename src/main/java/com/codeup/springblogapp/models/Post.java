@@ -1,5 +1,6 @@
 package com.codeup.springblogapp.models;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,12 @@ public class Post {
         this.title = title;
         this.body = body;
     }
+
+//    public List<Image> getImagesByPostId(long post_id){
+//        List<Image> images = new ArrayList<>();
+//        images.add(images.)
+//        return images;
+//    }
 
     public List<Image> getImages() { return images; }
 
