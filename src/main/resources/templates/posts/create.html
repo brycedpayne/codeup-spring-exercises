@@ -6,12 +6,12 @@
 <div class="container main-cont">
     <br>
     <h2>Write a new post!!!</h2>
-    <form action="/posts/create" method="post">
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
 
         <label for="title">Title:</label><br>
-        <input type="text" style="width: 100%; max-width: 100%" id="title" name="title" placeholder="Title your blog post"/><br>
+        <input th:field="*{title}" type="text" style="width: 100%; max-width: 100%" id="title" placeholder="Title your blog post"/><br>
         <label for="body">Blog Body:</label><br>
-        <textarea name="body" style="width: 100%; max-width: 100%" id="body" cols="30" rows="10" placeholder="What's on your mind?"></textarea><br>
+        <textarea th:field="*{body}" style="width: 100%; max-width: 100%" id="body" cols="30" rows="10" placeholder="What's on your mind?"></textarea><br>
         <!--    <input type="text" width="80vw" name="body" placeholder="What's on your mind?">-->
         <button class="btn btn-primary" type="submit" value="Post That Post">Post That Post</button>
 
