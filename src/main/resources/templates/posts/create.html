@@ -3,21 +3,20 @@
 <head th:replace="partials/partials :: head"></head>
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
-<br>
-
-<div class="container">
+<div class="container main-cont">
+    <br>
     <h2>Write a new post!!!</h2>
-    <hr>
     <form action="/posts/create" method="post">
 
         <label for="title">Title:</label><br>
         <input type="text" style="width: 100%; max-width: 100%" id="title" name="title" placeholder="Title your blog post"/><br>
-        <label for="body">Blog Body</label><br>
+        <label for="body">Blog Body:</label><br>
         <textarea name="body" style="width: 100%; max-width: 100%" id="body" cols="30" rows="10" placeholder="What's on your mind?"></textarea><br>
         <!--    <input type="text" width="80vw" name="body" placeholder="What's on your mind?">-->
         <button class="btn btn-primary" type="submit" value="Post That Post">Post That Post</button>
 
     </form>
+    <br>
 </div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>

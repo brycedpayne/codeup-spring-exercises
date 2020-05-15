@@ -8,12 +8,13 @@
 <body>
 
 <nav th:replace="partials/partials :: navbar"></nav>
-<br>
-<div class="container">
+
+<div class="container main-cont">
+    <br>
     <h3><a th:text="${post.title}" href="/posts"></a></h3>
     <div class="container">
         <p th:text="${post.body}"></p>
-        <div th:each="image : ${post.images}"><img th:src="${image.path}" style="height: 90px; width: auto"/></div>
+        <div class="d-inline" th:each="image : ${post.images}"><img th:src="${image.path}" style="height: 90px; width: auto"/></div>
 
         <p th:text="'Posted by: ' + ${post.user.email}"></p>
     </div>
@@ -63,6 +64,7 @@
             </div>
         </div>
     </div>
+    <br>
 
 </div>
 
