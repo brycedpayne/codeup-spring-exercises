@@ -4,7 +4,6 @@ body {
     background-position: center;
     background-size: cover;
     height: 100vh;
-;
     object-fit: contain;
 }
 .container{
