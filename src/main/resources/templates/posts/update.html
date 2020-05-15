@@ -4,13 +4,13 @@
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 <div class="container main-cont">
-    <form th:action="@{'/posts/update/' + ${post.id}}" method="post">
+    <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="post" th:object="${post}">
 
 
         <label for="title">Title:</label><br>
-        <input type="text" style="width:100%" id="title" name="title" th:value="${post.title}"><br>
+        <input th:field="*{title}" type="text" style="width:100%" id="title" th:value="${post.title}"><br> <!--name="title"-->
         <label for="body">Blog Body:</label><br>
-        <textarea name="body" id="body" cols="30" rows="10" style="width:100%" th:text="${post.body}"></textarea><br>
+        <textarea th:field="*{body}" id="body" cols="30" rows="10" style="width:100%" th:text="${post.body}"></textarea><br><!--name="body"-->
         <!--    <input type="text" width="80vw" name="body" placeholder="What's on your mind?">-->
         <button class="btn btn-primary btn-sm" type="submit" value="Update Post">Update That Post</button>
         <button class="btn btn-warning btn-sm" style="color: white" type="submit" formmethod="get" th:formaction="'/posts/'+${post.id}">Oops...Nevermind</button>
