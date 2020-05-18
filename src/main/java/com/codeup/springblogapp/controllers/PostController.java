@@ -18,12 +18,17 @@ public class PostController {
     private PostRepository postRepository;
     private UserRepository userRepository;
     private ImageRepository imageRepository;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postRepository, UserRepository userRepository, ImageRepository imageRepository){
+    public PostController(PostRepository postRepository, UserRepository userRepository, ImageRepository imageRepository, EmailService emailService){
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.imageRepository = imageRepository;
     }
+
+
+
+
 
     //mapping for displaying all the posts
 
@@ -39,6 +44,7 @@ public class PostController {
     public String postById(@ModelAttribute Post post, Model model) {
 //        Post post = new Post("Post 3","This is the body of post 3.");
         model.addAttribute("post",postRepository.getOne(post.getId()));
+//        model.addAttribute("user", post.getUser());
         return "posts/show";
     }
 
@@ -90,6 +96,7 @@ public class PostController {
 //        post.setBody(body);
         postRepository.save(post);
         model.addAttribute("post", post);
+//        model.addAttribute("user", post.getUser());
         return "redirect:/posts/" + post.getId();
     }
 

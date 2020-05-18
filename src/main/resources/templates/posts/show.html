@@ -16,7 +16,7 @@
         <p th:text="${post.body}"></p>
         <div class="d-inline" th:each="image : ${post.images}"><img th:src="${image.path}" style="height: 90px; width: auto"/></div>
 
-<!--        <p th:text="'Posted by: ' + ${post.user.email}"></p>-->
+        <a th:text="${post.user.email}" th:href="@{|mailto:${post.user.email}|}"></a>
     </div>
 
     <form>

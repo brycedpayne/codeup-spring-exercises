@@ -12,6 +12,7 @@
         <label for="body">Blog Body:</label><br>
         <textarea th:field="*{body}" id="body" cols="30" rows="10" style="width:100%" th:text="${post.body}"></textarea><br><!--name="body"-->
         <!--    <input type="text" width="80vw" name="body" placeholder="What's on your mind?">-->
+        <input type="hidden" th:field="*{user}" th:value="${post.user}">
         <button class="btn btn-primary btn-sm" type="submit" value="Update Post">Update That Post</button>
         <button class="btn btn-warning btn-sm" style="color: white" type="submit" formmethod="get" th:formaction="'/posts/'+${post.id}">Oops...Nevermind</button>
 
