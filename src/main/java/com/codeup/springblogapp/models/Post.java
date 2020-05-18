@@ -1,6 +1,6 @@
 package com.codeup.springblogapp.models;
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

@@ -5,10 +5,13 @@ import com.codeup.springblogapp.models.User;
 import com.codeup.springblogapp.repositories.ImageRepository;
 import com.codeup.springblogapp.repositories.PostRepository;
 import com.codeup.springblogapp.repositories.UserRepository;
+import com.codeup.springblogapp.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.model.IModel;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PostController {
@@ -18,12 +21,13 @@ public class PostController {
     private PostRepository postRepository;
     private UserRepository userRepository;
     private ImageRepository imageRepository;
-    private final EmailService emailService;
+    private EmailService emailService;
 
     public PostController(PostRepository postRepository, UserRepository userRepository, ImageRepository imageRepository, EmailService emailService){
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.imageRepository = imageRepository;
+        this.emailService = emailService;
     }
 
 
@@ -75,6 +79,8 @@ public class PostController {
         post.setUser(user);
 //        post.setImages(imageRepository.findAll());
         post = this.postRepository.save(post);
+        emailService.prepareAndSend(post,"You created a new post",
+                "Title: " + post.getTitle() + "\n" + "Body: " + post.getBody());
         model.addAttribute("post", post);
         return "/posts/show";
     }
