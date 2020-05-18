@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/partials :: head"></head>
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
@@ -8,14 +9,20 @@
 
 
         <label for="title">Title:</label><br>
-        <input th:field="*{title}" type="text" style="width:100%" id="title" th:value="${post.title}"><br> <!--name="title"-->
+        <input th:field="*{title}" type="text" style="width:100%" id="title" th:value="${post.title}"><br>
+        <!--name="title"-->
         <label for="body">Blog Body:</label><br>
-        <textarea th:field="*{body}" id="body" cols="30" rows="10" style="width:100%" th:text="${post.body}"></textarea><br><!--name="body"-->
+        <textarea th:field="*{body}" id="body" cols="30" rows="10" style="width:100%" th:text="${post.body}"></textarea><br>
+        <!--name="body"-->
         <!--    <input type="text" width="80vw" name="body" placeholder="What's on your mind?">-->
         <input type="hidden" th:field="*{user}" th:value="${post.user}">
-        <button class="btn btn-primary btn-sm" type="submit" value="Update Post">Update That Post</button>
-        <button class="btn btn-warning btn-sm" style="color: white" type="submit" formmethod="get" th:formaction="'/posts/'+${post.id}">Oops...Nevermind</button>
-
+        <button class="btn btn-primary btn-sm" type="submit" value="Update Post">
+            Update That Post
+        </button>
+        <button class="btn btn-warning btn-sm" style="color: white" type="submit"
+                formmethod="get"
+                th:formaction="'/posts/'+${post.id}">Oops...Nevermind
+        </button>
     </form>
     <br>
 </div>
