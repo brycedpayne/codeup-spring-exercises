@@ -6,12 +6,12 @@ import com.codeup.springblogapp.repositories.ImageRepository;
 import com.codeup.springblogapp.repositories.PostRepository;
 import com.codeup.springblogapp.repositories.UserRepository;
 import com.codeup.springblogapp.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class PostController {
@@ -29,10 +29,6 @@ public class PostController {
         this.imageRepository = imageRepository;
         this.emailService = emailService;
     }
-
-
-
-
 
     //mapping for displaying all the posts
 
@@ -75,7 +71,7 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String submitCreatePost(@ModelAttribute Post post, Model model) {
-        User user = userRepository.getOne((long) 1); //will be removed later
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //userRepository.getOne((long) 1); //will be removed later
         post.setUser(user);
 //        post.setImages(imageRepository.findAll());
         post = this.postRepository.save(post);
@@ -96,13 +92,8 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String submitUpdatedPost(@ModelAttribute Post post, Model model) {
-//        PathVariable(name = "id")long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body
-//        Post post = postRepository.getOne(id);
-//        post.setTitle(title);
-//        post.setBody(body);
         postRepository.save(post);
         model.addAttribute("post", post);
-//        model.addAttribute("user", post.getUser());
         return "redirect:/posts/" + post.getId();
     }
 
@@ -113,5 +104,22 @@ public class PostController {
         Post post = postRepository.getOne(id);
         postRepository.delete(post);
         return "redirect:/posts";
+    }
+
+    //mapping for searching through posts
+    @GetMapping("posts/search")
+    public String searchForPosts(@RequestParam(name = "searchTerm") String searchTerm, Model model){
+        List<Post> filteredPosts = postRepository.findByBodyContainingOrTitleContaining(searchTerm,searchTerm);
+        model.addAttribute("posts", filteredPosts);
+        return "posts/index";
+    }
+
+    //mapping for seeing the logged in user's posts
+
+    @GetMapping("post/users_posts")
+    public String showUsersPosts(Model model){
+        List<Post> usersPosts = postRepository.findByUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        model.addAttribute("posts", usersPosts);
+        return "posts/index";
     }
 }
