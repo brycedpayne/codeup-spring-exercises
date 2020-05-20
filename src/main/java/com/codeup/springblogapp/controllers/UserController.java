@@ -2,6 +2,7 @@ package com.codeup.springblogapp.controllers;
 
 import com.codeup.springblogapp.models.User;
 import com.codeup.springblogapp.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,5 +32,20 @@ public class UserController {
         user.setPassword(hash);
         users.save(user);
         return "redirect:/login";
+    }
+
+    @GetMapping("/update_profile")
+    public String showUpdateProfileForm(Model model){
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return "users/update";
+    }
+
+    @PostMapping("/update_profile")
+    public String saveProfileUpdate(@ModelAttribute User user, Model model){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+        users.save(user);
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return "redirect:/posts";
     }
 }

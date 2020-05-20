@@ -19,6 +19,7 @@
                                                                     style="height: 90px; width: auto"/></div>
 
         <a th:text="${post.user.email}" th:href="@{|mailto:${post.user.email}|}"></a>
+        <p th:text="${post.user}"></p>
     </div>
 
     <div sec:authorize="isAuthenticated()">
@@ -47,31 +48,6 @@
         </form>
 
     </div>
-    <!-- Modal -->
-    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
-    <!--         aria-hidden="true">-->
-    <!--        <div class="modal-dialog">-->
-    <!--            <div class="modal-content">-->
-    <!--                <div class="modal-header">-->
-    <!--                    <h5 class="modal-title" id="exampleModalLabel">Delete Post?</h5>-->
-    <!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-    <!--                        <span aria-hidden="true">&times;</span>-->
-    <!--                    </button>-->
-    <!--                </div>-->
-    <!--                <div class="modal-body">-->
-    <!--                    Are you sure you want to delete this post? This cannot be undone!-->
-    <!--                </div>-->
-    <!--                <div class="modal-footer">-->
-    <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>-->
-    <!--                    <form method="post" th:action="@{'/posts/delete/' + ${post.id}}">-->
-    <!--                        <button type="submit" class="btn btn-danger">Delete Post</button>-->
-    <!--                    </form>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-
-
     <br>
 
 </div>
