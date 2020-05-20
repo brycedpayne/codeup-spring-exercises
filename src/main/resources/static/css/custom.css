@@ -3,8 +3,11 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
     height: 100vh;
     object-fit: contain;
+    position: relative;
+    overscroll-behavior: none;
 }
 .container{
     margin-top: 1em;

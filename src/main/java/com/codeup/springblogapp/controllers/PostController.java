@@ -53,7 +53,7 @@ public class PostController {
     @GetMapping("/posts/create")
     public String createPost(Model model) {
         model.addAttribute("post", new Post());
-        return "/posts/create";
+        return "posts/create";
     }
 
 //    @PostMapping("/posts/create")
@@ -78,7 +78,7 @@ public class PostController {
         emailService.prepareAndSend(post,"You created a new post",
                 "Title: " + post.getTitle() + "\n" + "Body: " + post.getBody());
         model.addAttribute("post", post);
-        return "/posts/show";
+        return "posts/show";
     }
 
     //Mapping for updating a post
@@ -87,7 +87,7 @@ public class PostController {
     public String submitPostUpdate(@PathVariable(name = "id") long id, Model model) {
         Post post = postRepository.getOne(id);
         model.addAttribute("post", post);
-        return "/posts/update";
+        return "posts/update";
     }
 
     @PostMapping("/posts/{id}/edit")
